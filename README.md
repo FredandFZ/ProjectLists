@@ -11,3 +11,6 @@ Library System is a small project I developed independently, where I completed b
 
 ## Logistics Backend Management
 Logistics Backend Management is a backend project I participated in, where I designed several logistics-related backend APIs. The project adopted the Spring Boot framework for the backend. In this project, I was involved in designing parts of the backend code as well as the database design.
+
+## In the future
+Currently, I am working on two projects. One is a website that leverages LLMs to generate personalized travel plans, and the other is a second-hand trading platform, which I plan to complete within the next year. Both projects will be deployed on the cloud.
