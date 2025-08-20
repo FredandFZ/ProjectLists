@@ -1,0 +1,167 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="org.example.codesignconnect.mapper.ProjectMapper">
+
+    <select id="listProjectsBySearch" resultType="org.example.codesignconnect.model.Project">
+        SELECT *
+        FROM projects
+        <where>
+            <choose>
+                <when test="searchType == 0">
+                    LOWER(name) LIKE #{searchValue}
+                </when>
+                <when test="searchType == 1">
+                    LOWER(category) LIKE #{searchValue}
+                </when>
+                <when test="searchType == 2">
+                    LOWER(area) LIKE #{searchValue}
+                </when>
+            </choose>
+        </where>
+        ORDER BY create_time DESC
+        LIMIT #{offset}, #{size}
+    </select>
+
+    <select id="countProjectsBySearch" resultType="long">
+        SELECT COUNT(*)
+        FROM projects
+        <where>
+            <choose>
+                <when test="searchType == 0">
+                    LOWER(name) LIKE #{searchValue}
+                </when>
+                <when test="searchType == 1">
+                    LOWER(category) LIKE #{searchValue}
+                </when>
+                <when test="searchType == 2">
+                    LOWER(area) LIKE #{searchValue}
+                </when>
+            </choose>
+        </where>
+    </select>
+
+    <select id="getMyProjectsBySearch" resultType="org.example.codesignconnect.model.Project">
+        SELECT p.*
+        FROM projects p
+        JOIN project_member pm ON p.id = pm.project_id
+        WHERE pm.user_id = #{userId}
+        <if test="searchValue != null and searchType != null">
+            <choose>
+                <when test="searchType == 0">
+                    AND LOWER(p.name) LIKE #{searchValue}
+                </when>
+                <when test="searchType == 1">
+                    AND LOWER(p.category) LIKE #{searchValue}
+                </when>
+                <when test="searchType == 2">
+                    AND LOWER(p.tags) LIKE #{searchValue}
+                </when>
+            </choose>
+        </if>
+        ORDER BY p.create_time DESC
+    </select>
+
+
+    <select id="getProjectById" resultType="org.example.codesignconnect.model.Project">
+        SELECT * FROM projects WHERE id = #{id}
+    </select>
+
+
+    <select id="findProjectsByIds" resultType="org.example.codesignconnect.model.Project">
+        SELECT *
+        FROM projects
+        WHERE id IN
+        <foreach item="id" collection="projectIds" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </select>
+
+
+    <insert id="insertProject" useGeneratedKeys="true" keyProperty="id">
+        INSERT INTO projects (
+            name, creator_id, status, description, image_url,
+            channel_id, category, deadline, tags, area, create_time, update_time
+        ) VALUES (
+                     #{name}, #{creatorId}, #{status}, #{description}, #{imageUrl},
+                     #{channelId}, #{category}, #{deadline}, #{tags}, #{area}, NOW(), NOW()
+                 )
+    </insert>
+
+
+    <update id="updateProject">
+        UPDATE projects
+        SET name = #{name},
+            description = #{description},
+            category = #{category},
+            image_url = #{imageUrl},
+            channel_id = #{channelId},
+            tags = #{tags},
+            status = #{status},
+            area = #{area},
+            update_time = now()
+        WHERE id = #{id}
+    </update>
+
+    <update id="deleteProject">
+        UPDATE projects
+        SET status = 0,
+            update_time = now()
+        WHERE id = #{id}
+    </update>
+
+    <delete id="deleteProjectById" parameterType="int">
+        DELETE FROM projects WHERE id = #{projectId}
+    </delete>
+
+    <select id="searchProjects" resultType="org.example.codesignconnect.model.Project">
+        SELECT * FROM projects
+        WHERE 1 = 1
+        <if test="name != null and name != ''">
+            AND name LIKE CONCAT('%', #{name}, '%')
+        </if>
+        <if test="category != null and category != ''">
+            AND category = #{category}
+        </if>
+        <if test="creatorId != null">
+            AND creator_id = #{creatorId}
+        </if>
+        <if test="status != null">
+            AND status = #{status}
+        </if>
+        ORDER BY create_time DESC
+    </select>
+
+    <select id="searchByName" resultType="org.example.codesignconnect.model.Project">
+        SELECT *
+        FROM projects
+        WHERE LOWER(name) LIKE #{name}
+        ORDER BY create_time DESC
+    </select>
+
+    <select id="findProjectsByUserId" resultType="org.example.codesignconnect.model.Project">
+        select * from projects where creator_id = #{userId}
+    </select>
+
+    <delete id="deleteMemberFromProject">
+        DELETE FROM project_member
+        WHERE project_id = #{projectId} AND user_id = #{userId}
+    </delete>
+
+    <select id="getProjectStatus" resultType="int">
+        SELECT status
+        FROM projects
+        WHERE id = #{projectId}
+    </select>
+    <select id="getAllProjects" resultType="org.example.codesignconnect.model.Project">
+        SELECT * FROM projects
+    </select>
+
+    <update id="updateProjectStatus">
+        UPDATE projects
+        SET status = #{status}
+        WHERE id = #{projectId}
+    </update>
+
+</mapper>

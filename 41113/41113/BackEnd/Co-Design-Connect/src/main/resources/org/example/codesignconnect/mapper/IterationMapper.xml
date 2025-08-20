@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="org.example.codesignconnect.mapper.IterationMapper">
+
+    <insert id="insertIteration" parameterType="org.example.codesignconnect.model.Iteration" useGeneratedKeys="true" keyProperty="id">
+        INSERT INTO iteration (project_id, project_status, iterated_time, title, start_date, end_date)
+        VALUES (#{projectId}, #{projectStatus}, #{iteratedTime}, #{title}, #{startDate}, #{endDate})
+    </insert>
+
+    <select id="getIterationsByProjectId" resultType="org.example.codesignconnect.model.Iteration">
+        SELECT * FROM iteration WHERE project_id = #{projectId}
+    </select>
+
+    <update id="updateIteration" parameterType="org.example.codesignconnect.model.Iteration">
+        UPDATE iteration
+        SET project_status = #{projectStatus},
+            iterated_time = #{iteratedTime},
+            title = #{title},
+            start_date = #{startDate},
+            end_date = #{endDate}
+        WHERE id = #{id}
+    </update>
+
+    <select id="getIterations" resultType="org.example.codesignconnect.model.Iteration">
+        SELECT *
+        FROM iteration
+        WHERE project_id = #{projectId} AND project_status = #{status}
+    </select>
+    <select id="getProjectStatusById" resultType="java.lang.Short">
+        SELECT project_status FROM iteration WHERE id = #{id}
+    </select>
+    <select id="getIteratedTimeById" resultType="java.lang.Integer">
+        SELECT iterated_time FROM iteration WHERE id = #{id}
+    </select>
+
+    <delete id="deleteIteration" parameterType="int">
+        DELETE FROM iteration WHERE id = #{id}
+    </delete>
+
+</mapper>

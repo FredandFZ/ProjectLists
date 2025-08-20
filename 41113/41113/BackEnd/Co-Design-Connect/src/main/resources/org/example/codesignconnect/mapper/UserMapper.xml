@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="org.example.codesignconnect.mapper.UserMapper">
+    <insert id="addUser">
+        insert into users(username, email, password, type, invite_code_id)
+        values (#{username}, #{email}, #{password}, #{type}, #{inviteCodeId})
+    </insert>
+    <insert id="addCode">
+        insert into invite_codes(email, code, type)
+        values (#{email}, #{code}, #{type})
+    </insert>
+    <insert id="saveVerificationCode">
+        insert into verification_codes (email, code, expire_time) VALUES (#{email}, #{code}, #{expireTime})
+    </insert>
+    <update id="inactivateCode">
+        update invite_codes set is_used = true where id = #{id}
+    </update>
+    <update id="updatePassword">
+        update users set password = #{newPassword} where email = #{email}
+    </update>
+    <delete id="deleteVerificationCode">
+        delete from verification_codes where email = #{email}
+    </delete>
+    <delete id="deleteUser">
+        delete from users where id = #{id}
+    </delete>
+    <select id="findAllUsers" resultType="org.example.codesignconnect.model.User">
+        select * from users
+    </select>
+    <select id="findByEmail" resultType="org.example.codesignconnect.model.User">
+        select * from users where email = #{email}
+    </select>
+    <select id="checkCode" resultType="org.example.codesignconnect.model.InviteCode">
+        select * from invite_codes where code = #{code}
+    </select>
+    <select id="findVerificationCode" resultType="java.lang.String">
+        select code from verification_codes where email = #{email} and expire_time > now()
+    </select>
+    <select id="getUserById" resultType="org.example.codesignconnect.model.User">
+        select * from users where id = #{userId}
+    </select>
+    <select id="getUsernameById" resultType="java.lang.String">
+        SELECT username FROM users WHERE id = #{id}
+    </select>
+    <select id="selectAllUsers" resultType="org.example.codesignconnect.model.User">
+        SELECT * FROM users
+    </select>
+</mapper>

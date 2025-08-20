@@ -1,0 +1,165 @@
+CREATE database IF NOT EXISTS co_design_connect;
+USE co_design_connect;
+
+CREATE TABLE invite_codes (
+    id INT PRIMARY KEY AUTO_INCREMENT,
+    email VARCHAR(255) NOT NULL UNIQUE,
+    code VARCHAR(10) NOT NULL UNIQUE,
+    type tinyint unsigned NOT NULL,
+    is_used BOOLEAN DEFAULT FALSE,
+    create_time TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    update_time TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
+) engine=innodb DEFAULT CHARSET=utf8 comment = 'Invite Code';
+
+CREATE TABLE users (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    username VARCHAR(50) NOT NULL,
+    email VARCHAR(255) NOT NULL UNIQUE,
+    phone VARCHAR(20) UNIQUE,
+    password VARCHAR(20) NOT NULL,
+    type tinyint unsigned NOT NULL,
+    invite_code_id INT UNIQUE,
+    create_time TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    update_time TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+    FOREIGN KEY (invite_code_id) REFERENCES invite_codes(id) ON DELETE SET NULL
+) engine=innodb DEFAULT CHARSET=utf8 comment = 'User Info';
+
+CREATE TABLE verification_codes (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    email VARCHAR(255) NOT NULL UNIQUE,
+    code VARCHAR(10) NOT NULL,
+    create_time TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    expire_time TIMESTAMP NOT NULL
+) engine=innodb DEFAULT CHARSET=utf8 comment = 'Verification Code';
+
+CREATE TABLE projects (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    name VARCHAR(255) NOT NULL,
+    creator_id INT NOT NULL,
+    status tinyint unsigned NOT NULL DEFAULT 0,
+    description TEXT,
+    image_url VARCHAR(255),
+    area VARCHAR(255),
+    channel_id INT,
+    category VARCHAR(100),
+    deadline DATE,
+    tags VARCHAR(255),
+    create_time TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    update_time TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+    FOREIGN KEY (creator_id) REFERENCES users(id)
+) engine=innodb DEFAULT CHARSET=utf8 comment = 'Projects';
+
+CREATE TABLE channel (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    project_id INT NOT NULL,
+    title VARCHAR(255) NOT NULL,
+    description TEXT,
+    total_posts INT DEFAULT 0,
+    last_post_time TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+    create_time TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    update_time TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+    FOREIGN KEY (project_id) REFERENCES projects(id) ON DELETE CASCADE
+) engine=innodb DEFAULT CHARSET=utf8 comment = 'Channel';
+
+CREATE TABLE posts (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    channel_id INT NOT NULL,
+    author_id INT NOT NULL,
+    content TEXT NOT NULL,
+    title varchar(255),
+    create_time TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    update_time TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+    FOREIGN KEY (channel_id) REFERENCES channel(id) ON DELETE CASCADE,
+    FOREIGN KEY (author_id) REFERENCES users(id) ON DELETE CASCADE
+) engine=innodb DEFAULT CHARSET=utf8 comment = 'Posts';
+
+CREATE TABLE project_member (
+    id INT PRIMARY KEY AUTO_INCREMENT,
+    project_id INT NOT NULL,
+    user_id INT NOT NULL,
+    role VARCHAR(20) DEFAULT 'MEMBER',
+    joined_time DATETIME DEFAULT CURRENT_TIMESTAMP,
+    UNIQUE KEY uq_project_user (project_id, user_id),
+    FOREIGN KEY (project_id) REFERENCES projects(id) ON DELETE CASCADE,
+    FOREIGN KEY (user_id) REFERENCES users(id) ON DELETE CASCADE
+) engine=innodb DEFAULT CHARSET=utf8 comment = 'Project Member';
+
+CREATE TABLE replies (
+     id INT AUTO_INCREMENT PRIMARY KEY,
+     post_id INT NOT NULL,
+     channel_id INT NOT NULL,
+     author_id INT NOT NULL,
+     content TEXT NOT NULL,
+     create_time TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+     update_time TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+
+     FOREIGN KEY (post_id) REFERENCES posts(id) ON DELETE CASCADE,
+     FOREIGN KEY (channel_id) REFERENCES channel(id) ON DELETE CASCADE,
+     FOREIGN KEY (author_id) REFERENCES users(id) ON DELETE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='Replies to posts';
+
+CREATE TABLE iteration (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    project_id INT NOT NULL,
+    project_status TINYINT NOT NULL,
+    iterated_time INT NOT NULL,
+    title VARCHAR(100) NOT NULL,
+    start_date DATE DEFAULT NULL,
+    end_date DATE DEFAULT NULL,
+    create_time TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    update_time TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+    FOREIGN KEY (project_id) REFERENCES projects(id) ON DELETE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='Iteration';
+
+CREATE TABLE tasks (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    task_id INT DEFAULT 0,
+    project_id INT NOT NULL,
+    iteration_id INT NOT NULL,
+    code VARCHAR(20) NOT NULL,
+    content TEXT,
+    status TINYINT NOT NULL DEFAULT 0,
+    project_status TINYINT NOT NULL,
+    creator_id INT NOT NULL,
+    assignee_id INT DEFAULT NULL,
+    create_time TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    update_time TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+    FOREIGN KEY (project_id) REFERENCES projects(id) ON DELETE CASCADE,
+    FOREIGN KEY (creator_id) REFERENCES users(id) ON DELETE CASCADE,
+    FOREIGN KEY (assignee_id) REFERENCES users(id) ON DELETE CASCADE,
+    FOREIGN KEY (iteration_id) REFERENCES iteration(id) ON DELETE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='Tasks';
+
+CREATE TABLE token (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    type VARCHAR(20) NOT NULL,
+    refresh_token VARCHAR(255) NOT NULL,
+    access_token VARCHAR(255) NOT NULL,
+    create_time TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    update_time TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='Token';
+
+CREATE TABLE files (
+    id INT PRIMARY KEY AUTO_INCREMENT,
+    projectId INT NOT NULL,
+    projectStatus TINYINT NOT NULL,
+    type TINYINT,
+    iterationId INT NOT NULL,
+    name VARCHAR(255),
+    source VARCHAR(255),
+    creatorId INT NOT NULL,
+    createTime TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    updateTime TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='Files';
+
+CREATE TABLE markers (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    lat DOUBLE NOT NULL,
+    lng DOUBLE NOT NULL,
+    title VARCHAR(255),
+    description VARCHAR(255),
+    project_id INT NOT NULL,
+    createTime TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    updateTime TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+    FOREIGN KEY (project_id) REFERENCES projects(id) ON DELETE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='Map Markers';

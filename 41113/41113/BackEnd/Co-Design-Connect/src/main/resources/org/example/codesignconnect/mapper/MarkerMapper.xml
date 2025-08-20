@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="org.example.codesignconnect.mapper.MarkerMapper">
+    <insert id="insert">
+        INSERT INTO markers (lat, lng, title, description, project_id)
+        VALUES (#{lat}, #{lng}, #{title}, #{description}, #{projectId})
+    </insert>
+    <update id="update">
+        UPDATE markers
+        <set>
+            <if test="lat != null">
+                lat = #{lat},
+            </if>
+            <if test="lng != null">
+                lng = #{lng},
+            </if>
+            <if test="title != null">
+                title = #{title},
+            </if>
+            <if test="description != null">
+                description = #{description},
+            </if>
+        </set>
+        WHERE id = #{id}
+    </update>
+    <delete id="delete">
+        DELETE FROM markers WHERE id = #{id}
+    </delete>
+    <select id="findAllByProjectId" resultType="org.example.codesignconnect.model.Marker">
+        SELECT * FROM markers WHERE project_id = #{projectId}
+    </select>
+</mapper>

@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="org.example.codesignconnect.mapper.FileMapper">
+    <select id="selectFileById" resultType="org.example.codesignconnect.model.File">
+        SELECT * FROM files WHERE id = #{id}
+    </select>
+
+    <select id="selectAllFiles" resultType="org.example.codesignconnect.model.File">
+        SELECT * FROM files
+    </select>
+    <select id="selectFilesInFolder" resultType="org.example.codesignconnect.model.File">
+        SELECT * FROM files
+        WHERE projectId = #{projectId} AND projectStatus = #{projectStatus} AND iterationId = #{iterationId}
+    </select>
+
+    <insert id="insertFile" parameterType="org.example.codesignconnect.model.File" useGeneratedKeys="true" keyProperty="id">
+        INSERT INTO files(projectId, projectStatus, type, iterationId, name, source, creatorId, createTime, updateTime)
+        VALUES(#{projectId}, #{projectStatus}, #{type}, #{iterationId}, #{name}, #{source}, #{creatorId}, NOW(), NOW())
+    </insert>
+
+    <update id="updateFile" parameterType="org.example.codesignconnect.model.File">
+        UPDATE files
+        SET projectId = #{projectId},
+            projectStatus = #{projectStatus},
+            type = #{type},
+            iterationId = #{iterationId},
+            name = #{name},
+            source = #{source},
+            creatorId = #{creatorId},
+            updateTime = NOW()
+        WHERE id = #{id}
+    </update>
+
+    <delete id="deleteFileById" parameterType="int">
+        DELETE FROM files WHERE id = #{id}
+    </delete>
+</mapper>

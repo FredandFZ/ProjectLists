@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="org.example.codesignconnect.mapper.ReplyMapper">
+
+    <insert id="insertReply" parameterType="org.example.codesignconnect.model.Reply" useGeneratedKeys="true" keyProperty="id">
+        INSERT INTO replies (post_id, author_id, content, channel_id)
+        VALUES (#{postId}, #{authorId}, #{content}, #{channelId})
+    </insert>
+
+    <select id="getRepliesByPostId" resultType="org.example.codesignconnect.model.Reply">
+        SELECT *
+        FROM replies
+        WHERE post_id = #{postId}
+        ORDER BY create_time
+    </select>
+
+</mapper>
