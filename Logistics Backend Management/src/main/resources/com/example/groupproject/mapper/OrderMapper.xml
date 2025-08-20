@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.groupproject.mapper.OrderMapper">
+    <sql id="orderColumns">
+        <trim suffixOverrides=",">
+            <if test="goodsId != null">goods_id,</if>
+            <if test="count != null">count,</if>
+            <if test="ifDiscount != null">if_discount,</if>
+            <if test="payStatus != null">pay_status,</if>
+            <if test="userId != null">user_id,</if>
+            <if test="createTime != null">create_time,</if>
+            <if test="updateTime != null">update_time</if>
+        </trim>
+    </sql>
+    <sql id="orderValues">
+        <trim suffixOverrides=",">
+            <if test="goodsId != null">#{goodsId},</if>
+            <if test="count != null">#{count},</if>
+            <if test="ifDiscount != null">#{ifDiscount},</if>
+            <if test="payStatus != null">#{payStatus},</if>
+            <if test="userId != null">#{userId},</if>
+            <if test="createTime != null">#{createTime},</if>
+            <if test="updateTime != null">#{updateTime}</if>
+        </trim>
+    </sql>
+    <insert id="addOrder">
+        insert into orders(<include refid="orderColumns"></include>)
+            values (<include refid="orderValues"></include>)
+    </insert>
+    <delete id="deleteOrder">
+        delete from orders
+        <where>
+            id = #{id}
+        </where>
+    </delete>
+    <select id="listAllOrder" resultType="com.example.groupproject.model.Order">
+        select * from orders
+        <where>
+            user_id=#{userId}
+        </where>
+    </select>
+    <select id="selectOrderById" resultType="com.example.groupproject.model.Order">
+        select * from orders
+        <where>
+            id=#{id}
+        </where>
+    </select>
+    <select id="SelectOrderByGoodsId" resultType="com.example.groupproject.model.Order">
+        select * from orders
+        <where>
+            <if test="userId != null">user_id = #{userId}</if>
+            <if test="goodsIdList != null and !goodsIdList.isEmpty()">
+                 and goods_id in
+                    <foreach collection="goodsIdList" item="goodsId" separator="," open="(" close=")">
+                        #{goodsId}
+                    </foreach>
+            </if>
+        </where>
+    </select>
+    <update id="updateOrder">
+        update orders
+        <set>
+            <if test=" payStatus != null"> pay_status = #{payStatus},</if>
+            <if test="updateTime != null">update_time = #{updateTime}</if>
+        </set>
+        <where>
+            id = #{id}
+        </where>
+    </update>
+
+</mapper>

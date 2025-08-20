@@ -1,0 +1,1534 @@
+{
+	"info": {
+		"_postman_id": "310a3650-b08b-4892-93b0-ac9f0c2616e3",
+		"name": "team02",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "29230332"
+	},
+	"item": [
+		{
+			"name": "UserController",
+			"item": [
+				{
+					"name": "用户登录",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "token",
+								"value": "eyJhbGciOiJIUzI1NiJ9.eyJuYW1lIjoiRloiLCJpZCI6MSwiZXhwIjoxNjk4MjkzNzY0fQ.7SBoqtJ8Lx10wETe4BFwlA0hxkrfEyUWf8xfGhgxt1U",
+								"type": "text",
+								"disabled": true
+							}
+						],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "username",
+									"value": "FZ",
+									"type": "text"
+								},
+								{
+									"key": "password",
+									"value": "123456",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "http://localhost:8080/login",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"login"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "增加用户信息",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "token",
+								"value": "eyJhbGciOiJIUzI1NiJ9.eyJuYW1lIjoiRloiLCJpZCI6MSwiZXhwIjoxNjk4MjkzNzY0fQ.7SBoqtJ8Lx10wETe4BFwlA0hxkrfEyUWf8xfGhgxt1U",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\":\"tester01\",\r\n    \"gender\":1,\r\n    \"birthday\":\"2050-12-31\",\r\n    \"phoneNumber\":\"10086\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/user",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"user"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "更改用户信息",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "token",
+								"value": "eyJhbGciOiJIUzI1NiJ9.eyJuYW1lIjoiRloiLCJpZCI6MSwiZXhwIjoxNjk4MjkzNzY0fQ.7SBoqtJ8Lx10wETe4BFwlA0hxkrfEyUWf8xfGhgxt1U",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"id\":7,\r\n    \"name\":\"tester02\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/user",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"user"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "删除用户信息",
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "token",
+								"value": "eyJhbGciOiJIUzI1NiJ9.eyJuYW1lIjoiRloiLCJpZCI6MSwiZXhwIjoxNjk4MjkzNzY0fQ.7SBoqtJ8Lx10wETe4BFwlA0hxkrfEyUWf8xfGhgxt1U",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "id",
+									"value": "6",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "http://localhost:8080/user",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"user"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "储存用户密码",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "token",
+								"value": "eyJhbGciOiJIUzI1NiJ9.eyJuYW1lIjoiRloiLCJpZCI6MSwiZXhwIjoxNjk4MjkzNzY0fQ.7SBoqtJ8Lx10wETe4BFwlA0hxkrfEyUWf8xfGhgxt1U",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "password",
+									"value": "020202",
+									"type": "text"
+								},
+								{
+									"key": "userId",
+									"value": "7",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "http://localhost:8080/password",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"password"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "用户名查询用户",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "token",
+								"value": "eyJhbGciOiJIUzI1NiJ9.eyJuYW1lIjoiRloiLCJpZCI6MSwiZXhwIjoxNjk4MjkzNzY0fQ.7SBoqtJ8Lx10wETe4BFwlA0hxkrfEyUWf8xfGhgxt1U",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": []
+						},
+						"url": {
+							"raw": "http://localhost:8080/user?username=tester02",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"user"
+							],
+							"query": [
+								{
+									"key": "username",
+									"value": "tester02"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "展示用户资料",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "token",
+								"value": "eyJhbGciOiJIUzI1NiJ9.eyJuYW1lIjoiRloiLCJpZCI6MSwiZXhwIjoxNjk4NDI1ODE1fQ.Av0rBPwAuzeXiYeBDlWovLcFTVOmFhCbseYXfa8kklI",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "http://localhost:8080/user/1",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"user",
+								"1"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "DeliverController",
+			"item": [
+				{
+					"name": "添加送货地址",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "token",
+								"value": "eyJhbGciOiJIUzI1NiJ9.eyJuYW1lIjoiRloiLCJpZCI6MSwiZXhwIjoxNjk4MjkzNzY0fQ.7SBoqtJ8Lx10wETe4BFwlA0hxkrfEyUWf8xfGhgxt1U",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\":\"FZ\",\r\n    \"phoneNumber\":\"111222333\",\r\n    \"region\":\"China\",\r\n    \"detailedAddress\":\"NEU\",\r\n    \"userId\":1\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/address",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"address"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "显示送货地址列表",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "token",
+								"value": "eyJhbGciOiJIUzI1NiJ9.eyJuYW1lIjoiRloiLCJpZCI6MSwiZXhwIjoxNjk4NDMwOTM4fQ.38wLfBVgGXVllucCfa_-Q38hxP81mHi_b2eQXpQf1jw",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\":\"FZ\",\r\n    \"phoneNumber\":\"123456789\",\r\n    \"region\":\"China\",\r\n    \"detailedAddress\":\"NEUQ\",\r\n    \"userId\":1\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/address?userId=1",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"address"
+							],
+							"query": [
+								{
+									"key": "userId",
+									"value": "1"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "更改地址信息",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "token",
+								"value": "eyJhbGciOiJIUzI1NiJ9.eyJuYW1lIjoiRloiLCJpZCI6MSwiZXhwIjoxNjk4MjkzNzY0fQ.7SBoqtJ8Lx10wETe4BFwlA0hxkrfEyUWf8xfGhgxt1U",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"phoneNumber\":\"111111111\",\r\n    \"id\":9\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/address",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"address"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "删除地址信息",
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "token",
+								"value": "eyJhbGciOiJIUzI1NiJ9.eyJuYW1lIjoiRloiLCJpZCI6MSwiZXhwIjoxNjk4MjkzNzY0fQ.7SBoqtJ8Lx10wETe4BFwlA0hxkrfEyUWf8xfGhgxt1U",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "id",
+									"value": "7",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "http://localhost:8080/address",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"address"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "添加物流信息",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "token",
+								"value": "eyJhbGciOiJIUzI1NiJ9.eyJuYW1lIjoiRloiLCJpZCI6MSwiZXhwIjoxNjk4MzQ5ODc4fQ.osrEu3nuDf1a5bjY8bCBe3lmi8cmTDVM6MFPg0TiUlY",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"orderId\":8,\r\n    \"addressId\":10,\r\n    \"deliveryName\":\"Express\",\r\n    \"location\":\"NEUQ\",\r\n    \"deliveryPhoneNumber\":\"123456789\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/delivery",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"delivery"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "修改物流状态",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "token",
+								"value": "eyJhbGciOiJIUzI1NiJ9.eyJuYW1lIjoiRloiLCJpZCI6MSwiZXhwIjoxNjk4MzQ5ODc4fQ.osrEu3nuDf1a5bjY8bCBe3lmi8cmTDVM6MFPg0TiUlY",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"id\":1,\r\n    \"location\":\"NEUQ\",\r\n    \"status\":2\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/delivery",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"delivery"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "删除物流信息",
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "token",
+								"value": "eyJhbGciOiJIUzI1NiJ9.eyJuYW1lIjoiRloiLCJpZCI6MSwiZXhwIjoxNjk4MzQ5ODc4fQ.osrEu3nuDf1a5bjY8bCBe3lmi8cmTDVM6MFPg0TiUlY",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "id",
+									"value": "3",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "http://localhost:8080/delivery",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"delivery"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "显示所有物流信息",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "token",
+								"value": "eyJhbGciOiJIUzI1NiJ9.eyJuYW1lIjoiRloiLCJpZCI6MSwiZXhwIjoxNjk4NDMwOTM4fQ.38wLfBVgGXVllucCfa_-Q38hxP81mHi_b2eQXpQf1jw",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "http://localhost:8080/delivery/list?userId=3",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"delivery",
+								"list"
+							],
+							"query": [
+								{
+									"key": "userId",
+									"value": "3"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "查询物流信息",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "token",
+								"value": "eyJhbGciOiJIUzI1NiJ9.eyJuYW1lIjoiRloiLCJpZCI6MSwiZXhwIjoxNjk4MzQ5ODc4fQ.osrEu3nuDf1a5bjY8bCBe3lmi8cmTDVM6MFPg0TiUlY",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "http://localhost:8080/delivery?deliveryName=Express&userId=3&goodsName=6&receiverPhoneNumber=111222333",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"delivery"
+							],
+							"query": [
+								{
+									"key": "deliveryName",
+									"value": "Express"
+								},
+								{
+									"key": "userId",
+									"value": "3"
+								},
+								{
+									"key": "goodsName",
+									"value": "6"
+								},
+								{
+									"key": "receiverPhoneNumber",
+									"value": "111222333"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "ID查询物流",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "token",
+								"value": "eyJhbGciOiJIUzI1NiJ9.eyJuYW1lIjoiRloiLCJpZCI6MSwiZXhwIjoxNjk4NDMwOTM4fQ.38wLfBVgGXVllucCfa_-Q38hxP81mHi_b2eQXpQf1jw",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "http://localhost:8080/delivery/1",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"delivery",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "ID查询地址",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "token",
+								"value": "eyJhbGciOiJIUzI1NiJ9.eyJuYW1lIjoiRloiLCJpZCI6MSwiZXhwIjoxNjk4NDMwOTM4fQ.38wLfBVgGXVllucCfa_-Q38hxP81mHi_b2eQXpQf1jw",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "http://localhost:8080/address/5",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"address",
+								"5"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "OrderController",
+			"item": [
+				{
+					"name": "添加订单",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "token",
+								"value": "eyJhbGciOiJIUzI1NiJ9.eyJuYW1lIjoiRloiLCJpZCI6MSwiZXhwIjoxNjk4MjkzNzY0fQ.7SBoqtJ8Lx10wETe4BFwlA0hxkrfEyUWf8xfGhgxt1U",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"userId\":3,\r\n    \"goodsId\":7,\r\n    \"payStatus\":1\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/order",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"order"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "删除订单",
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "token",
+								"value": "eyJhbGciOiJIUzI1NiJ9.eyJuYW1lIjoiRloiLCJpZCI6MSwiZXhwIjoxNjk4MjkzNzY0fQ.7SBoqtJ8Lx10wETe4BFwlA0hxkrfEyUWf8xfGhgxt1U",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "id",
+									"value": "10",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "http://localhost:8080/order",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"order"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "修改订单信息",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "token",
+								"value": "eyJhbGciOiJIUzI1NiJ9.eyJuYW1lIjoiRloiLCJpZCI6MSwiZXhwIjoxNjk4MjkzNzY0fQ.7SBoqtJ8Lx10wETe4BFwlA0hxkrfEyUWf8xfGhgxt1U",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "payStatus",
+									"value": "0",
+									"type": "text"
+								},
+								{
+									"key": "id",
+									"value": "9",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "http://localhost:8080/order",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"order"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "显示所有订单",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "token",
+								"value": "eyJhbGciOiJIUzI1NiJ9.eyJuYW1lIjoiRloiLCJpZCI6MSwiZXhwIjoxNjk4MjkzNzY0fQ.7SBoqtJ8Lx10wETe4BFwlA0hxkrfEyUWf8xfGhgxt1U",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "http://localhost:8080/order/list?page=1&pageSize=5&userId=3",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"order",
+								"list"
+							],
+							"query": [
+								{
+									"key": "page",
+									"value": "1"
+								},
+								{
+									"key": "pageSize",
+									"value": "5"
+								},
+								{
+									"key": "userId",
+									"value": "3"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "ID查询订单",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "token",
+								"value": "eyJhbGciOiJIUzI1NiJ9.eyJuYW1lIjoiRloiLCJpZCI6MSwiZXhwIjoxNjk4NDMwOTM4fQ.38wLfBVgGXVllucCfa_-Q38hxP81mHi_b2eQXpQf1jw",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "http://localhost:8080/order/8",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"order",
+								"8"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "商品名字查询订单",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "token",
+								"value": "eyJhbGciOiJIUzI1NiJ9.eyJuYW1lIjoiRloiLCJpZCI6MSwiZXhwIjoxNjk4NDMwOTM4fQ.38wLfBVgGXVllucCfa_-Q38hxP81mHi_b2eQXpQf1jw",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "http://localhost:8080/order?name=test3&userId=3",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"order"
+							],
+							"query": [
+								{
+									"key": "name",
+									"value": "test3"
+								},
+								{
+									"key": "userId",
+									"value": "3"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "ShopController",
+			"item": [
+				{
+					"name": "注册店铺",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "token",
+								"value": "eyJhbGciOiJIUzI1NiJ9.eyJuYW1lIjoiRloiLCJpZCI6MSwiZXhwIjoxNjk4MzQxMTcyfQ.9GEc8ngs6CWnc53rvghzafc_HMmnFiQN-wM2h5s--NQ",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"shopType\":1,\r\n    \"name\":\"testShop\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/shop",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"shop"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "注销店铺",
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "token",
+								"value": "eyJhbGciOiJIUzI1NiJ9.eyJuYW1lIjoiRloiLCJpZCI6MSwiZXhwIjoxNjk4MzQxMTcyfQ.9GEc8ngs6CWnc53rvghzafc_HMmnFiQN-wM2h5s--NQ",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "id",
+									"value": "8",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "http://localhost:8080/shop",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"shop"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "显示所有店铺",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "token",
+								"value": "eyJhbGciOiJIUzI1NiJ9.eyJuYW1lIjoiRloiLCJpZCI6MSwiZXhwIjoxNjk4MzQxMTcyfQ.9GEc8ngs6CWnc53rvghzafc_HMmnFiQN-wM2h5s--NQ",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": []
+						},
+						"url": {
+							"raw": "http://localhost:8080/shop/list",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"shop",
+								"list"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "ID查询店铺",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "token",
+								"value": "eyJhbGciOiJIUzI1NiJ9.eyJuYW1lIjoiRloiLCJpZCI6MSwiZXhwIjoxNjk4MzQxMTcyfQ.9GEc8ngs6CWnc53rvghzafc_HMmnFiQN-wM2h5s--NQ",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "http://localhost:8080/shop/8",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"shop",
+								"8"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "条件查询店铺",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "token",
+								"value": "eyJhbGciOiJIUzI1NiJ9.eyJuYW1lIjoiRloiLCJpZCI6MSwiZXhwIjoxNjk4MzQxMTcyfQ.9GEc8ngs6CWnc53rvghzafc_HMmnFiQN-wM2h5s--NQ",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "http://localhost:8080/shop?name=testShop",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"shop"
+							],
+							"query": [
+								{
+									"key": "name",
+									"value": "testShop"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "修改店铺信息",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "token",
+								"value": "eyJhbGciOiJIUzI1NiJ9.eyJuYW1lIjoiRloiLCJpZCI6MSwiZXhwIjoxNjk4MzQxMTcyfQ.9GEc8ngs6CWnc53rvghzafc_HMmnFiQN-wM2h5s--NQ",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"shopType\":0,\r\n    \"name\":\"testShop01\",\r\n    \"id\":8\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/shop",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"shop"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "GoodsController",
+			"item": [
+				{
+					"name": "添加商品",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "token",
+								"value": "eyJhbGciOiJIUzI1NiJ9.eyJuYW1lIjoiRloiLCJpZCI6MSwiZXhwIjoxNjk4MzQxMTcyfQ.9GEc8ngs6CWnc53rvghzafc_HMmnFiQN-wM2h5s--NQ",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "name",
+									"value": "test8",
+									"type": "text"
+								},
+								{
+									"key": "price",
+									"value": "999.98",
+									"type": "text"
+								},
+								{
+									"key": "discount",
+									"value": "0.88",
+									"type": "text"
+								},
+								{
+									"key": "goodsType",
+									"value": "裤子",
+									"type": "text"
+								},
+								{
+									"key": "goodsBrand",
+									"value": "Mihoyo",
+									"type": "text"
+								},
+								{
+									"key": "ifCheck",
+									"value": "0",
+									"type": "text"
+								},
+								{
+									"key": "shopId",
+									"value": "4",
+									"type": "text"
+								},
+								{
+									"key": "picture",
+									"type": "file",
+									"src": "/C:/Users/豆豆/Desktop/屏幕截图 2023-10-26 134147.png"
+								}
+							]
+						},
+						"url": {
+							"raw": "http://localhost:8080/goods",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"goods"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "条件查询商品",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "token",
+								"value": "eyJhbGciOiJIUzI1NiJ9.eyJuYW1lIjoiRloiLCJpZCI6MSwiZXhwIjoxNjk4NDMwOTM4fQ.38wLfBVgGXVllucCfa_-Q38hxP81mHi_b2eQXpQf1jw",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "http://localhost:8080/goods?name=test7&goodsType=鞋",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"goods"
+							],
+							"query": [
+								{
+									"key": "name",
+									"value": "test7"
+								},
+								{
+									"key": "goodsType",
+									"value": "鞋"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "删除商品",
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "token",
+								"value": "eyJhbGciOiJIUzI1NiJ9.eyJuYW1lIjoiRloiLCJpZCI6MSwiZXhwIjoxNjk4MzQxMTcyfQ.9GEc8ngs6CWnc53rvghzafc_HMmnFiQN-wM2h5s--NQ",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "id",
+									"value": "13",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "http://localhost:8080/goods",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"goods"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "显示商店所有商品",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "token",
+								"value": "eyJhbGciOiJIUzI1NiJ9.eyJuYW1lIjoiRloiLCJpZCI6MSwiZXhwIjoxNjk4NDI1ODE1fQ.Av0rBPwAuzeXiYeBDlWovLcFTVOmFhCbseYXfa8kklI",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": []
+						},
+						"url": {
+							"raw": "http://localhost:8080/goods/shop/4?page=2&pageSize=3",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"goods",
+								"shop",
+								"4"
+							],
+							"query": [
+								{
+									"key": "page",
+									"value": "2"
+								},
+								{
+									"key": "pageSize",
+									"value": "3"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "添加评论",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "token",
+								"value": "eyJhbGciOiJIUzI1NiJ9.eyJuYW1lIjoiRloiLCJpZCI6MSwiZXhwIjoxNjk4MzQ5ODc4fQ.osrEu3nuDf1a5bjY8bCBe3lmi8cmTDVM6MFPg0TiUlY",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "userId",
+									"value": "7",
+									"type": "text"
+								},
+								{
+									"key": "goodsId",
+									"value": "14",
+									"type": "text"
+								},
+								{
+									"key": "content",
+									"value": "不如原神",
+									"type": "text"
+								},
+								{
+									"key": "picture",
+									"type": "file",
+									"src": "/C:/Users/豆豆/Desktop/屏幕截图 2023-10-26 134147.png",
+									"disabled": true
+								}
+							]
+						},
+						"url": {
+							"raw": "http://localhost:8080/comment",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"comment"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "删除评论",
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "token",
+								"value": "eyJhbGciOiJIUzI1NiJ9.eyJuYW1lIjoiRloiLCJpZCI6MSwiZXhwIjoxNjk4MzQ5ODc4fQ.osrEu3nuDf1a5bjY8bCBe3lmi8cmTDVM6MFPg0TiUlY",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "id",
+									"value": "2",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "http://localhost:8080/comment",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"comment"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "显示商品所有评论",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "token",
+								"value": "eyJhbGciOiJIUzI1NiJ9.eyJuYW1lIjoiRloiLCJpZCI6MSwiZXhwIjoxNjk4NDMwOTM4fQ.38wLfBVgGXVllucCfa_-Q38hxP81mHi_b2eQXpQf1jw",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "http://localhost:8080/comment/shop/14",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"comment",
+								"shop",
+								"14"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "显示用户所有评论",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "token",
+								"value": "eyJhbGciOiJIUzI1NiJ9.eyJuYW1lIjoiRloiLCJpZCI6MSwiZXhwIjoxNjk4MzQ5ODc4fQ.osrEu3nuDf1a5bjY8bCBe3lmi8cmTDVM6MFPg0TiUlY",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "http://localhost:8080/comment/user/7",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"comment",
+								"user",
+								"7"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "修改评论",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "token",
+								"value": "eyJhbGciOiJIUzI1NiJ9.eyJuYW1lIjoiRloiLCJpZCI6MSwiZXhwIjoxNjk4MzQ5ODc4fQ.osrEu3nuDf1a5bjY8bCBe3lmi8cmTDVM6MFPg0TiUlY",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "content",
+									"value": "不如原神",
+									"type": "text"
+								},
+								{
+									"key": "id",
+									"value": "7",
+									"type": "text"
+								},
+								{
+									"key": "picture",
+									"type": "file",
+									"src": "/C:/Users/豆豆/Desktop/屏幕截图 2023-10-26 134147.png",
+									"disabled": true
+								}
+							]
+						},
+						"url": {
+							"raw": "http://localhost:8080/comment",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"comment"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "修改商品信息",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "token",
+								"value": "eyJhbGciOiJIUzI1NiJ9.eyJuYW1lIjoiRloiLCJpZCI6MSwiZXhwIjoxNjk4MzQ5ODc4fQ.osrEu3nuDf1a5bjY8bCBe3lmi8cmTDVM6MFPg0TiUlY",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "id",
+									"value": "14",
+									"type": "text"
+								},
+								{
+									"key": "name",
+									"value": "test9",
+									"type": "text"
+								},
+								{
+									"key": "price",
+									"value": "9999.999",
+									"type": "text"
+								},
+								{
+									"key": "picture",
+									"type": "file",
+									"src": "/C:/Users/豆豆/Desktop/屏幕截图 2023-10-26 134147.png"
+								}
+							]
+						},
+						"url": {
+							"raw": "http://localhost:8080/goods",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"goods"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "ID查询评论",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "token",
+								"value": "eyJhbGciOiJIUzI1NiJ9.eyJuYW1lIjoiRloiLCJpZCI6MSwiZXhwIjoxNjk4NDMwOTM4fQ.38wLfBVgGXVllucCfa_-Q38hxP81mHi_b2eQXpQf1jw",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "http://localhost:8080/comment/6",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"comment",
+								"6"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "ID查询商品",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "token",
+								"value": "eyJhbGciOiJIUzI1NiJ9.eyJuYW1lIjoiRloiLCJpZCI6MSwiZXhwIjoxNjk4NDMwOTM4fQ.38wLfBVgGXVllucCfa_-Q38hxP81mHi_b2eQXpQf1jw",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "http://localhost:8080/goods/3",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"goods",
+								"3"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	]
+}

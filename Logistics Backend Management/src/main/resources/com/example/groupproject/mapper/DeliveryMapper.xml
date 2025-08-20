@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.groupproject.mapper.DeliveryMapper">
+
+    <insert id="addDelivery">
+        insert into delivery(order_id, address_id, delivery_name, location, status, delivery_phone_number, create_time, update_time)
+        values(#{orderId}, #{addressId}, #{deliveryName}, #{location}, #{status}, #{deliveryPhoneNumber}, #{createTime}, #{updateTime})
+    </insert>
+    <update id="updateDelivery">
+        update delivery
+        <set>
+            <if test="location != null and location != ''">location = #{location},</if>
+            <if test="status != null">status = #{status}</if>
+        </set>
+        <where>
+            id = #{id}
+        </where>
+    </update>
+    <delete id="deleteDelivery">
+        delete from delivery
+        <where>
+            id = #{id}
+        </where>
+    </delete>
+    <select id="selectDelivery" resultType="com.example.groupproject.model.Delivery">
+        select * from delivery
+        <where>
+            <if test="deliveryName != null and deliveryName != ''">delivery_name = #{deliveryName}</if>
+            <if test="orderIdList1 != null and !orderIdList1.isEmpty()">
+                and order_id in
+                <foreach collection="orderIdList1" item="orderId" separator="," open="(" close=")">
+                    #{orderId}
+                </foreach>
+            </if>
+            <if test="orderIdList2 != null and !orderIdList2.isEmpty()">
+                and order_id in
+                <foreach collection="orderIdList2" item="orderId" separator="," open="(" close=")">
+                    #{orderId}
+                </foreach>
+            </if>
+            <if test="addressIdList != null and !addressIdList.isEmpty()">
+                and address_id in
+                <foreach collection="addressIdList" item="addressId" separator="," open="(" close=")">
+                    #{addressId}
+                </foreach>
+            </if>
+        </where>
+    </select>
+    <select id="selectDeliveryById" resultType="com.example.groupproject.model.Delivery">
+        select * from delivery
+        <where>
+            id = #{id}
+        </where>
+    </select>
+    <select id="selectAddressById" resultType="com.example.groupproject.model.Address">
+        select * from address
+        <where>
+            id = #{id}
+        </where>
+    </select>
+</mapper>

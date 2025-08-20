@@ -1,0 +1,109 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.groupproject.mapper.GoodsMapper">
+
+    <insert id="addGoods">
+        insert into goods(name, price, discount, goods_type, goods_brand, collage, if_check, shop_id, picture, if_delete, create_time, update_time)
+        values(#{name}, #{price}, #{discount}, #{goodsType}, #{goodsBrand},#{collage}, #{ifCheck}, #{shopId}, #{picture},#{ifDelete}, #{createTime}, #{updateTime})
+    </insert>
+    <insert id="addComment">
+        insert into comments(user_id, goods_id, content, picture, if_anonymous, if_appended, create_time, update_time)
+        values (#{userId}, #{goodsId}, #{content}, #{picture}, #{ifAnonymous}, #{ifAppended}, #{createTime}, #{updateTime})
+    </insert>
+    <update id="deleteGoods">
+        update goods
+        <set>
+            if_delete=1
+        </set>
+        <where>
+            id=#{id}
+        </where>
+    </update>
+    <update id="updateComment">
+        update comments
+        <set>
+            <if test="content != null and content != ''">content = #{content},</if>
+            <if test="picture != null and picture != ''">picture = #{picture},</if>
+            <if test="updateTime != null">update_time = #{updateTime}</if>
+        </set>
+        <where>id = #{id}</where>
+    </update>
+    <update id="updateGoods">
+        update goods
+        <set>
+            <if test="name != null and name != ''">name = #{name},</if>
+            <if test="price != null">price = #{price},</if>
+            <if test="discount != null">discount = #{discount},</if>
+            <if test="goodsType != null and goodsType != ''">goods_type = #{goodsType},</if>
+            <if test="goodsBrand != null and goodsBrand != ''">goods_brand = #{goodsBrand},</if>
+            <if test="collage != null">collage = #{collage},</if>
+            <if test="ifCheck != null">if_check = #{ifCheck},</if>
+            <if test="updateTime != null">update_time = #{updateTime},</if>
+            <if test="picture != null and picture != ''">picture = #{picture}</if>
+        </set>
+        <where>id = #{id}</where>
+    </update>
+    <delete id="deleteComment">
+        delete from comments
+        <where>
+            id in
+               <foreach collection="commentIdList" item="commentId" separator="," open="(" close=")">
+                   #{commentId}
+               </foreach>
+        </where>
+    </delete>
+    <select id="selectGoodsByName" resultType="com.example.groupproject.model.Goods">
+        select * from goods
+        <where>
+            name like concat('%',#{name},'%') and if_delete = 0
+        </where>
+
+    </select>
+    <select id="selectGoods" resultType="com.example.groupproject.model.Goods">
+        select * from goods
+        <where>
+            if_delete = 0
+            <if test="name != null and name !=''">
+                and name like concat('%',#{name},'%')
+            </if>
+            <if test="priceBegin != null and priceEnd !=null ">
+                and price between #{priceBegin} and #{priceEnd}
+            </if>
+            <if test="goodsType != null and goodsType !=''">
+                and goods_type like concat('%',#{goodsType},'%')
+            </if>
+            <if test="goodsBrand != null and goodsBrand !=''">
+                and goods_brand like concat('%',#{goodsBrand},'%')
+            </if>
+        </where>
+    </select>
+    <select id="selectGoodsByShop" resultType="com.example.groupproject.model.Goods">
+        select * from goods
+        <where>
+            shop_id=#{shopId} and if_delete = 0
+        </where>
+    </select>
+    <select id="selectGoodsById" resultType="com.example.groupproject.model.Goods">
+        select * from goods
+        <where>
+            id = #{id} and if_delete = 0
+        </where>
+    </select>
+    <select id="selectComment" resultType="com.example.groupproject.model.Comment">
+        select * from comments
+        <where>
+            <if test="goodsId != null">goods_id = #{goodsId}</if>
+            <if test="userId != null"> and user_id = #{userId}</if>
+        </where>
+    </select>
+    <select id="selectAppendedComment" resultType="com.example.groupproject.model.Comment">
+        select * from comments
+        <where>if_appended = #{id}</where>
+    </select>
+    <select id="selectCommentById" resultType="com.example.groupproject.model.Comment">
+        select * from comments
+        <where>id = #{id}</where>
+    </select>
+</mapper>

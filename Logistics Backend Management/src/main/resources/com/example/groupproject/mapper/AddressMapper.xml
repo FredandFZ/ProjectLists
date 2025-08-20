@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.groupproject.mapper.AddressMapper">
+
+    <insert id="addAddress">
+        insert into address(name, phone_number, region, detailed_address, delivery_status, user_id, if_delete, create_time, update_time)
+        values (#{name}, #{phoneNumber}, #{region}, #{detailedAddress}, #{deliveryStatus}, #{userId},#{ifDelete} ,#{createTime}, #{updateTime})
+    </insert>
+    <update id="updateAddress">
+        update address
+        <set>
+            <if test="name != null and name != ''">name = #{name},</if>
+            <if test="phoneNumber != null and phoneNumber != ''">phone_number = #{phoneNumber},</if>
+            <if test="region != null and region != ''">region = #{region},</if>
+            <if test="detailedAddress != null and detailedAddress != ''">detailed_address = #{detailedAddress},</if>
+            <if test="deliveryStatus != null">delivery_status = #{deliveryStatus},</if>
+            <if test="updateTime != null">update_time = #{updateTime}</if>
+        </set>
+        <where>
+            id = #{id}
+        </where>
+    </update>
+    <update id="deleteAddress">
+        update address
+        <set>
+            if_delete=1
+        </set>
+        <where>
+            id = #{id}
+        </where>
+    </update>
+    <select id="selectAddressByUserId" resultType="com.example.groupproject.model.Address">
+        select * from address
+        <where>
+            user_id = #{userId} and if_delete = 0
+        </where>
+    </select>
+    <select id="countAddress" resultType="java.lang.Integer">
+        select count(*) from address
+        <where>if_delete = 0</where>
+    </select>
+    <select id="selectAddressById" resultType="com.example.groupproject.model.Address">
+        select * from address
+        <where>
+            id = #{id} and if_delete = 0
+        </where>
+    </select>
+    <select id="selectAddressByPhoneNumber" resultType="com.example.groupproject.model.Address">
+        select * from address
+        <where>
+            phone_number = #{phoneNumber} and if_delete = 0
+        </where>
+    </select>
+</mapper>
